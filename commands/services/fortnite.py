@@ -75,7 +75,7 @@ async def pay_vb(callback_query: types.CallbackQuery, state: FSMContext):
     match callback_query.data:
         case "pay":
             pay_b = InlineKeyboardButton('Оплата',
-                                         url="")
+                                         url="https://aaio.io/")
             check_pay_b = InlineKeyboardButton('Проверка оплаты', callback_data='check_pay')
 
             back_prod_b = InlineKeyboardButton('Назад🔙', callback_data='back_pay_prod_menu')
@@ -90,7 +90,7 @@ async def pay_vb(callback_query: types.CallbackQuery, state: FSMContext):
                                    f"Для проверки платежа воспользуйтесь кнопкой: <b>Проверка оплаты</b>"),
                 reply_markup=pay_markup
             )
-            await FortniteClass.check_pay_vb.set()
+            await FortniteClass.next()
         case "back_to_prod":
             await bot.answer_callback_query(callback_query.id)
             await callback_query.message.edit_media(
@@ -114,7 +114,7 @@ async def check_pay_vb(callback_query: types.CallbackQuery, state: FSMContext):
                            ),
                 reply_markup=shop_m.back_menu_markup
             )
-            await FortniteClass.back_to_menu.set()
+            await FortniteClass.next()
         case "back_pay_prod_menu":
             await bot.answer_callback_query(callback_query.id)
             await callback_query.message.edit_media(
